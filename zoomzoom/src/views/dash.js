@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 
 
 const Dash = (props)=>{
-  console.log("props in dash", props.entry)
   return (
     <div>
     <Entry />

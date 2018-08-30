@@ -25,7 +25,6 @@ class Entryform extends Component{
   };
   handleSubmit = (event) =>{
     event.preventDefault();
-    console.log("This the state", this.state);
       this.props.postEntry(this.state)
 
   }

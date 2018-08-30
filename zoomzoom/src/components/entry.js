@@ -1,16 +1,58 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Table, Card } from 'reactstrap';
+import { Table } from 'reactstrap';
 
 class Entry extends Component{
 
   render(){
-    console.log("Props entry", this.props.entry);
-    console.log("Props register", this.props.register);
-    console.log("Props total", this.props.cashinflow);
+    let cashArr = [];
+    if(this.props.entry){
+      cashArr = this.props.entry.map((item)=>{
+        let matchingCashFlow = this.props.cashinflow.filter((cashItem)=> cashItem.extra_cash_id === item.id)
+        item.total = matchingCashFlow.length > 0 ? matchingCashFlow[0].cash_total : 'unknown';
+        return (
+          <tr key={item.id}>
+             <th scope="row">{item.created_at.slice(0, 10)}</th>
+             <td>{item.yesterday_cash}</td>
+             <td>{item.cash_from_bank}</td>
+             <td>{item.cash_from_atm}</td>
+             <td>{item.orlandi_valuta}</td>
+             <td>{item.money_order}</td>
+             <td>{item.money_gram}</td>
+             <td>{item.lotto_lottery}</td>
+             <td>{item.anonymous}</td>
+             <td>{item.total}</td>
+           </tr>
+         );
+      })
+    }
 
-    let extra_cash = this.props.entry.map(item => <div key={item.id}>{item}</div>)
-    console.log("extra_cash", extra_cash)
+    let regArr = [];
+    if(this.props.register){
+      regArr = this.props.register.map((item)=>{
+        let matchingCashFlow = this.props.cashinflow.filter((cashItem)=> cashItem.register_reading_id === item.id)
+        item.total = matchingCashFlow.length > 0 ? matchingCashFlow[0].register_total : 'unknown';
+        return (
+          <tr key={item.id}>
+            <th scope="row">{item.created_at.slice(0,10)}</th>
+            <td>{item.sale}</td>
+            <td>{item.check_cash_commission}</td>
+            <td>{item.total}</td>
+          </tr>
+         );
+      })
+    }
+
+    let totalArr = this.props.cashinflow ? this.props.cashinflow.map((item)=> (
+      <tr key={item.id}>
+        <th scope="row">{item.created_at.slice(0,10)}</th>
+        <td>{item.cash_total}</td>
+        <td>{item.register_total}</td>
+        <td>{item.total_cash_flow}</td>
+      </tr>
+    )) : [];
+    // let extra_cash = this.props.entry.map(item => <div key={item.id}>{item}</div>)
+    // console.log("extra_cash", extra_cash)
     return (
       <div className="container">
         <div className="row">
@@ -31,18 +73,7 @@ class Entry extends Component{
                </tr>
              </thead>
              <tbody>
-               <tr>
-                 <th scope="row">1</th>
-                 <td>Table cell</td>
-                 <td>Table cell</td>
-                 <td>Table cell</td>
-                 <td>Table cell</td>
-                 <td>Table cell</td>
-                 <td>Table cell</td>
-                 <td>Table cell</td>
-                 <td>Table cell</td>
-                 <td>Table cell</td>
-               </tr>
+               {cashArr}
              </tbody>
            </Table>
          </div>
@@ -58,12 +89,7 @@ class Entry extends Component{
                    </tr>
                  </thead>
                  <tbody>
-                   <tr>
-                     <th scope="row">1</th>
-                     <td>Table cell</td>
-                     <td>Table cell</td>
-                     <td>Table cell</td>
-                   </tr>
+                   {regArr}
                  </tbody>
                </Table>
           </div>
@@ -80,12 +106,7 @@ class Entry extends Component{
                    </tr>
                  </thead>
                  <tbody>
-                   <tr>
-                     <th scope="row">1</th>
-                     <td>Table cell</td>
-                     <td>Table cell</td>
-                     <td>Table cell</td>
-                   </tr>
+                   {totalArr}
                  </tbody>
                </Table>
           </div>
@@ -100,5 +121,6 @@ const mapStateToProps = (state)=>({
   register: state.register,
   cashinflow: state.cashinflow
 });
+
 
 export default connect(mapStateToProps)(Entry);

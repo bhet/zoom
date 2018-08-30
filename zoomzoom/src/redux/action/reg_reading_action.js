@@ -9,7 +9,6 @@ export const fetchRegisterReading = ()=>{
   return dispatch =>{
     axios.get(`http://localhost:8000/register/reading`)
       .then(response =>{
-        console.log(" register response", response)
         dispatch({
           type: FETCH_REGISTER_READING,
           payload: response.data
