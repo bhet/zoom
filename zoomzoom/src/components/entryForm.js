@@ -34,6 +34,7 @@ class Entryform extends Component{
       <Form onSubmit={this.handleSubmit}>
         <div className='row'>
           <div className='col'>
+            <h4>Enter Cash Entry of Today</h4>
             <div className="extracash">
             <div className="input-group mb-3">
               <div className="input-group-prepend">
@@ -103,6 +104,7 @@ class Entryform extends Component{
           </div>
 
         <div className='col'>
+          <h4>Enter Register Entry of Today</h4>
           <div className="register">
             <div className="input-group mb-3">
               <div className="input-group-prepend">

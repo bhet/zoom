@@ -56,7 +56,9 @@ class Entry extends Component{
     return (
       <div className="container">
         <div className="row">
+
           <div className="col">
+            <h4>Daily Cash inflow Table</h4>
         <Table bordered style={{overflowX: "scroll"}}>
              <thead>
                <tr>
@@ -79,6 +81,7 @@ class Entry extends Component{
          </div>
 
           <div className="col-3">
+            <h4>Daily Register Sale and Commission Info Table</h4>
             <Table bordered>
                  <thead>
                    <tr>
@@ -94,7 +97,7 @@ class Entry extends Component{
                </Table>
           </div>
         </div>
-
+        <h4>Daily Total  Cash inflow</h4>
           <div className="row">
             <Table bordered>
                  <thead>

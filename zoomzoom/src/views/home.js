@@ -4,8 +4,9 @@ import TopNav from './TopNav';
 const Home = ()=>{
   return (
     <div>
-      <TopNav />
-      <div>This is home page</div>
+      <div>
+      <h1>Please Login to visit the ZOOMZOOM</h1>
+      </div>
     </div>
 
   )

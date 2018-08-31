@@ -12,6 +12,7 @@ import Dash from './views/dash';
 import Signup from './views/create';
 import Entryform from './components/entryForm';
 import TopNav from './views/TopNav';
+import Nav from './components/Nav';
 
 class App extends Component {
   render() {
@@ -19,21 +20,16 @@ class App extends Component {
     return (
       <div className="App">
         <Router>
+
           <div>
-            <ul>
-              <li><Link to="/">Home</Link></li>
-              <li><Link to="/login">Login</Link></li>
-              <li><Link to="/dash">Dash</Link></li>
-              <li><Link to="/create">Create</Link></li>
-            </ul>
-            <hr/>
+            <TopNav />
 
             <Route exact path ="/" component={Home}/>
             <Route  path ="/login" component={Login}/>
             <Route  path ="/dash" component={Dash}/>
             <Route path="/addform" component={Entryform}></Route>
-            <Route  path ="/signup" component={Signup}/>
-            <Route  path ="/signup" component={Signup}/>
+            <Route  path ="/signup" component={Login}/>
+
           </div>
         </Router>
       </div>

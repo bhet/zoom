@@ -13,9 +13,24 @@ import {
 } from 'reactstrap'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import { submitLogin } from '../redux/action/login';
 
 
 class LoginForm extends Component {
+  state = {
+    email: '',
+    password: '',
+    isLoggedIn: false
+  }
+
+  handleSubmit = (event) =>{
+    event.preventDefault();
+    this.setState({
+
+      isLoggedIn: !this.state.isLoggedIn
+    })
+
+  }
 
   render() {
     return (
@@ -29,7 +44,9 @@ class LoginForm extends Component {
               boxShadow: '3px 3px 47px 0px rgba(0,0,0,0.5)'
             }}
           >
-            <Form>
+            <h4>Login Here</h4>
+            <div></div>
+            <Form onSubmit={this.handleSubmit}>
               <FormGroup>
                 <Label for="email-field">Email</Label>
                 <Input
@@ -37,8 +54,7 @@ class LoginForm extends Component {
                   name="email"
                   id="email-field"
                   placeholder="email"
-                  value=""
-
+                  onChange = {e=> this.setState({email:e.target.value})}
                 />
               </FormGroup>
               <FormGroup>
@@ -48,8 +64,7 @@ class LoginForm extends Component {
                   name="password"
                   id="pass-field"
                   placeholder="password"
-                  value=""
-
+                  onChange ={e=>this.setState({password:e.target.value})}
                 />
               </FormGroup>
               {this.props.showLoginError ? (
@@ -57,10 +72,12 @@ class LoginForm extends Component {
                   Either your email or password is incorrect. Please try again.
                 </Alert>
               ) : null}
-              <Button className="mr-3" type="submit" color="primary">
+              <Button className="mr-3" type="button" color="primary" onClick={()=>window.location.href="/dash"}>
                 Submit
               </Button>
-              <a href="/signup">Not a member?</a>
+              <p>Not a member?</p>
+              <p>Signup below</p>
+
             </Form>
           </Col>
         </Row>
@@ -69,4 +86,12 @@ class LoginForm extends Component {
   }
 }
 
-export default LoginForm
+const mapStateToProps = (state) =>({
+  email: state.email
+})
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+
+}, dispatch)
+
+export default connect()(LoginForm)

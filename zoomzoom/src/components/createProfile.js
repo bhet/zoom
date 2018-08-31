@@ -15,7 +15,15 @@ import { bindActionCreators } from 'redux'
 
 
 export class Signup extends Component {
-
+  state = {
+    isValid: true,
+    passwordClasses: 'form-control',
+    name: '',
+    username: '',
+    email: '',
+    password: '',
+    verify_password: ''
+  }
   render() {
     return (
       <Container className="main-wrapper">
@@ -28,6 +36,7 @@ export class Signup extends Component {
               boxShadow: '3px 3px 47px 0px rgba(0,0,0,0.5)'
             }}
           >
+          <h4>Signup Here</h4>
             <Form >
               <FormGroup>
                 <Label for="name">Name</Label>
@@ -36,8 +45,7 @@ export class Signup extends Component {
                   name="name"
                   id="name-field"
                   placeholder="name"
-                  value=""
-
+                  onChange={e=>this.setState({name: e.target.value})}
                 />
               </FormGroup>
               <FormGroup>
@@ -47,8 +55,7 @@ export class Signup extends Component {
                   name="username"
                   id="username-field"
                   placeholder="username"
-                  value=""
-
+                  onChange={e=>this.setState({username: e.target.value})}
                 />
               </FormGroup>
               <FormGroup>
@@ -58,8 +65,7 @@ export class Signup extends Component {
                   name="email"
                   id="email"
                   placeholder="email"
-                  value=""
-
+                  onChange={e=>this.setState({email: e.target.value})}
                 />
               </FormGroup>
 
@@ -70,8 +76,7 @@ export class Signup extends Component {
                   name="password"
                   id="password-field"
                   placeholder="password"
-                  value=""
-
+                  onChange={e=>this.setState({password: e.target.value})}
                 />
               </FormGroup>
               <FormGroup>
@@ -81,7 +86,7 @@ export class Signup extends Component {
                   name="password"
                   id="verify_password"
                   placeholder="password"
-                  value=""
+                  onChange={e=>this.setState({verify_password: e.target.value})}
                 />
 
               </FormGroup>
