@@ -1,6 +1,7 @@
 const knex = require("../../db/knex.js");
 const express = require('express');
 const router = express.Router();
+const jwt = require('jsonwebtoken');
 
 router.post('/signup', (req, res)=>{
   knex('users').insert({
@@ -15,16 +16,21 @@ router.post('/signup', (req, res)=>{
 });
 
 router.post('/login', (req, res)=>{
+  console.log(req.body);
   knex('users').where('email', req.body.email)
   .then(result =>{
     let user = result[0];
-    if(user.pasword === req.body.password){
-      req.session.user = user;
-      req.session.save(()=>{
-        res.send(200)
-      })
+    console.log(user.password);
+    console.log(req.body.password);
+    console.log(user.password === req.body.password);
+    if(user.password === req.body.password){
+      console.log("running this");
+      let token = jwt.sign(user, require('../../config/secret_key'));
+      console.log(token);
+      res.json({token});
+
     } else {
-      res.redirect('/login')
+      res.sendStatus(400);
     }
   })
 })

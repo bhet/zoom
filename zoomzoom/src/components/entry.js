@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Table } from 'reactstrap';
+import FilterTransaction from './filterTransaction';
+
 
 class Entry extends Component{
 
   render(){
+    console.log(this.props.entry);
     let cashArr = [];
     if(this.props.entry){
       cashArr = this.props.entry.map((item)=>{
@@ -55,8 +58,11 @@ class Entry extends Component{
     // console.log("extra_cash", extra_cash)
     return (
       <div className="container">
-        <div className="row">
+        <FilterTransaction />
+        <div>{
 
+          }</div>
+        <div className="row">
           <div className="col">
             <h4>Daily Cash inflow Table</h4>
         <Table bordered style={{overflowX: "scroll"}}>

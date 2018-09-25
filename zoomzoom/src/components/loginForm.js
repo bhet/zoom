@@ -14,22 +14,25 @@ import {
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { submitLogin } from '../redux/action/login';
+import { withRouter } from 'react-router'
 
 
 class LoginForm extends Component {
   state = {
     email: '',
-    password: '',
-    isLoggedIn: false
+    password: ''
   }
 
   handleSubmit = (event) =>{
+    console.log('running submit')
     event.preventDefault();
-    this.setState({
+    this.props.submitLogin(this.state)
+  }
 
-      isLoggedIn: !this.state.isLoggedIn
-    })
-
+  componentDidUpdate(){
+    if(this.props.token){
+      this.props.history.push('/dash');
+    }
   }
 
   render() {
@@ -72,7 +75,7 @@ class LoginForm extends Component {
                   Either your email or password is incorrect. Please try again.
                 </Alert>
               ) : null}
-              <Button className="mr-3" type="button" color="primary" onClick={()=>window.location.href="/dash"}>
+              <Button className="mr-3" type="submit" color="primary">
                 Submit
               </Button>
               <p>Not a member?</p>
@@ -87,11 +90,11 @@ class LoginForm extends Component {
 }
 
 const mapStateToProps = (state) =>({
-  email: state.email
+  token: state.loginReducer.token
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
+  submitLogin
+}, dispatch);
 
-}, dispatch)
-
-export default connect()(LoginForm)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LoginForm))

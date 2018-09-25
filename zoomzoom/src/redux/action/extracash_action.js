@@ -4,6 +4,7 @@ export const FETCH_ENTRY = "FETCH_ENTRY";
 export const FETCH_ENTRY_FAILED = "FETCH_ENTRY_FAILED";
 export const ADD_NEW_ENTRY = "ADD_NEW_ENTRY";
 export const ADD_NEW_ENTRY_FAILED = "ADD_NEW_ENTRY_FAILED";
+export const FILTER_TRANSACTION = "FILTER_TRANSACTION";
 
 export const fetchEntry = ()=>{
   return dispatch =>{
@@ -40,5 +41,14 @@ export const postEntry = (newentry) =>{
           payload: err
         })
       })
+  }
+}
+
+export const filterTransaction = (transaction) =>{
+  return dispatch =>{
+    dispatch({
+      type: FILTER_TRANSACTION,
+      payload: transaction
+    })
   }
 }

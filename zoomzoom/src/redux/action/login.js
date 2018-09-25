@@ -5,10 +5,11 @@ export const LOGIN_FAILED = "LOGIN_FAILED";
 export const SIGNUP_SUCCESS = "SIGNUP_SUCCESS";
 export const SIGNUP_FAILED = "SIGNUP_FAILED";
 
-export const submitLogin = (email, password) =>{
+export const submitLogin = (user) =>{
   return dispatch =>{
-    axios.post(`http://localhost:8000/user/login`)
+    axios.post(`http://localhost:8000/user/login`, user)
       .then(response =>{
+        console.log(response)
         dispatch({
           type: LOGIN_SUCCESS,
           payload: response.data

@@ -23,13 +23,11 @@ class App extends Component {
 
           <div>
             <TopNav />
-
             <Route exact path ="/" component={Home}/>
             <Route  path ="/login" component={Login}/>
             <Route  path ="/dash" component={Dash}/>
             <Route path="/addform" component={Entryform}></Route>
             <Route  path ="/signup" component={Login}/>
-
           </div>
         </Router>
       </div>
